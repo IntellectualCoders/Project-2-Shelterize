@@ -12,9 +12,9 @@ const Locate = () => {
       <div class="row d-flex align-items-center justify-content-center">
         <div class="about-content col-lg-12">
           <h1 class="text-white">
-          Locate the Dog
+          Find Shelter
           </h1>
-          <p class="text-white link-nav"><a href="/">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/locate"> Locate</a></p>
+          <p class="text-white link-nav"><a href="/">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/locate"> Shelter</a></p>
         </div>
       </div>
     </div>
@@ -24,16 +24,22 @@ const Locate = () => {
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-9">
 							<div class="title text-center">
-								<h1 class="mb-20">Found a Dog? Help Us Locate</h1>
-								<p>Please provide details about the dog, along with the photo, if possible.</p>
+								<h1 class="mb-20">Need help? Find nearest shelter</h1>
+								<p>Please provide us your details </p>
 							</div>
 						</div>
 					</div>
 					<div class="row justify-content-center">
 						<form class="col-lg-9">
-						  <div class="form-group">
+						  <div class="form-row">
+							  <div className="col-6 mb-30">
 						    <label for="first-name">Your Name</label>
 						    <input type="text" class="form-control" placeholder="Your Name" required />
+							</div>
+							<div class="col-6 mb-30">
+						  		<label for="age">Age</label>
+						   		<input type="number" class="form-control" placeholder="Age" required />
+						  	</div>
 						  </div>
 
 					  <div class="form-row">
@@ -47,7 +53,7 @@ const Locate = () => {
 						  	</div></div>
 						  	<br/><br/>
 						  <div class="form-group">
-						    <label for="Address">Where the dog was found?</label>
+						    <label for="Address">Where are you right now?</label>
 						    <input type="text" class="form-control mb-20" placeholder="Address" required />
 						    <input type="text" class="form-control" placeholder="Address 2" />
 						  </div>
@@ -73,7 +79,7 @@ const Locate = () => {
 
 
 						  <fieldset class="form-group" required>
-							<label for="day">Health Condition of the dog..</label>
+							<label for="day">Your Health Condition..</label>
                             <div class="form-group ">
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
@@ -87,24 +93,10 @@ const Locate = () => {
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="inlinecheckbox" id="inlineRadio3" value="option3" /> Pregnant or Breast-feeding
+                                        <input class="form-check-input" type="checkbox" name="inlinecheckbox" id="inlineRadio3" value="option3" /> Pregnant or with small kids
                                     </label>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="inlinecheckbox" id="inlineRadio2" value="option4" /> Lost pet (if the dog has Collar)
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="inlinecheckbox" id="inlineRadio2" value="option5" /> Looks mentally disturbed or unstable
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="inlinecheckbox" id="inlineRadio2" value="option5" /> Is it a puppy ?
-                                    </label>
-                                </div></div>
+                               </div>
 
 
 						  </fieldset>

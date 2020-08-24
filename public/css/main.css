@@ -2228,7 +2228,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(https://cdn.pixabay.com/photo/2015/09/02/13/07/park-918890_1280.jpg) center;
+  background: url(https://images.pexels.com/photos/220365/pexels-photo-220365.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center;
   background-size: cover;
 }
 
@@ -2292,6 +2292,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding-right: 30px;
   border: 1px solid transparent;
   color: #fff;
+  width: auto;
+  
 }
 
 .header-btn:hover {
@@ -2601,7 +2603,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .calltoaction-area {
-  background: url(../img/call-bg.jpg) center;
+  background: url(https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80) center;
   background-size: cover;
   text-align: center;
 }

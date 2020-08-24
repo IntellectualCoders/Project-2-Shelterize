@@ -6,7 +6,7 @@ const Header = () => {
       <div className="container main-menu">
         <div className="row align-items-center justify-content-between d-flex">
           <div id="logo">
-            <a href="/"><h2 >DogHome</h2></a>
+            <a href="/"><h2 >Shelterize</h2></a>
           </div>
           <nav id="nav-menu-container">
             <ul className="nav-menu sf-js-enabled sf-arrows">
