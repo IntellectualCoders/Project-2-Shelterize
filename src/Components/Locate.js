@@ -26,6 +26,7 @@ const Locate = () => {
 							<div class="title text-center">
 								<h1 class="mb-20">Need help? Find nearest shelter</h1>
 								<p>Please provide us your details </p>
+								
 							</div>
 						</div>
 					</div>
@@ -105,6 +106,7 @@ const Locate = () => {
 						    <label for="note">Further Details</label>
 						    <textarea class="form-control" id="exampleTextarea" rows="5" placeholder="Mention any other detail you want to share..."></textarea>
 						  </div>
+						  
 						  <button type="submit" class="primary-btn float-right">Submit</button>
 					</form>
 

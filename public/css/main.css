@@ -2178,7 +2178,31 @@ body.mobile-nav-active #mobile-nav-toggle {
   cursor: pointer;
   position: relative;
 }
-
+.form-btn {
+  background-color: #f5280d;
+  line-height: 42px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid transparent;
+  color: #fff;
+  display: inline-block;
+  font-weight: 500;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  position: relative;
+}
+.form-btn:hover {
+  background: transparent;
+  color: #fa3200;
+  border-color: #fa3200;
+}
+.form-btn:focus {
+  outline: none;
+}
 .primary-btn:focus {
   outline: none;
 }

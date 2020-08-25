@@ -19,7 +19,7 @@ const Home = () => {
     							</p>
 								<div className="row justify-content-between">
     							<a href="/locate" className="col-10 col-md-3 primary-btn header-btn text-uppercase offset-1 mb-1" >Need Help</a>
-								<a href="./#adopt" className="col-10 col-md-3 primary-btn header-btn text-uppercase offset-1 mb-1" style={{marginright:"0px", padding:"20px,20px,20px,20px"}}>Want to Help</a>
+								<a href="./#wanttohelp" className="col-10 col-md-3 primary-btn header-btn text-uppercase offset-1 mb-1" style={{marginright:"0px", padding:"20px,20px,20px,20px"}}>Want to Help</a>
 								<a href="/" className="col-10 col-md-3 primary-btn header-btn text-uppercase offset-1 mb-1">Shelter Near Me</a>
 								</div>
     						</div>
@@ -44,7 +44,7 @@ const Home = () => {
     				</div>
     			</section> */}
 
-    			<section className="process-area section-gap" id="adopt">
+    			<section className="process-area section-gap" id="wanttohelp">
     				<div className="container">
     					<div className="row d-flex justify-content-center">
     						<div className="menu-content pb-60 col-lg-8">
@@ -101,11 +101,11 @@ const Home = () => {
     								<span className="lnr lnr-magic-wand"></span>
     								<a href="#">
     									<h4>
-    										Helped a person in need
+    										Congratulations
     									</h4>
     								</a>
     								<p>
-    									Successfuly provided shelter to many people in need.
+    									Successfuly provided shelter to many people in need. 
     								</p>
     							</div>
     						</div>
