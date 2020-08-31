@@ -54,7 +54,7 @@ class Firebase {
     });
   }
 
-  addUser(name, email, city, state, postalcode) {
+  addUser(name, email, city, state, postalcode, lat, long, service) {
     // if (!this.auth.currentUser) {
     //   return alert("Not authorized");
     // }
@@ -72,6 +72,9 @@ class Firebase {
       city,
       state,
       postalcode,
+      lat,
+      long,
+      service,
       uid: new Date().getTime(),
     };
 
@@ -92,6 +95,37 @@ class Firebase {
       });
   }
 
+  addCustomer(name, age, email, phone, city, state, postalcode, lat, long) {
+    const data = {
+      name,
+      age,
+      email,
+      phone,
+      city,
+      state,
+      postalcode,
+      lat,
+      long,
+      uid: new Date().getTime(),
+    };
+
+    // adding data here
+    this.db
+      .collection("customers")
+      .doc(data.uid.toString())
+      .set(data)
+      .then(() => {
+        // NotificationManager.success("A new user has been added", "Success");
+        alert("Sucess : New Customer Added");
+        // window.location = "/";
+      })
+      .catch((error) => {
+        // NotificationManager.error(error.message, "Create user failed");
+        alert("Failure : New Customer NOT Added" + "  " + error);
+        // this.setState({ isSubmitting: false });
+      });
+  }
+
   isInitialized() {
     return new Promise((resolve) => {
       this.auth.onAuthStateChanged(resolve);
@@ -102,17 +136,17 @@ class Firebase {
     return this.auth.currentUser && this.auth.currentUser.email;
   }
 
-  async getCurrentUserDetail(email) {
-    await this.db
-      .collection("users")
-      .where("email", "==", `${email}`)
-      .get()
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs.map((doc) => doc.data());
-        console.log(data);
-        return data;
-      });
-  }
+  // async getCurrentUserDetail(email) {
+  //   await this.db
+  //     .collection("users")
+  //     .where("email", "==", `${email}`)
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       const data = querySnapshot.docs.map((doc) => doc.data());
+  //       console.log(data);
+  //       return data;
+  //     });
+  // }
 }
 
 export default new Firebase();

@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Home from "./Components/Home";
 import Volunteer from "./Components/Volunteer";
 import Login from "./Components/Login";
+import List from "./Components/List";
 import Profile from "./Components/Profile";
 import Locate from "./Components/Locate";
 import NotFound from "./Components/NotFound";
@@ -47,6 +48,10 @@ function App() {
 
         <Route path="/nearme">
           <Nearme />
+        </Route>
+
+        <Route path="/list">
+          <List />
         </Route>
 
         <Route path="*">

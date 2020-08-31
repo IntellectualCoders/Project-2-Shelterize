@@ -11,16 +11,54 @@ const Volunteer = ({ history }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalcode, setPostalcode] = useState("");
+  const [lat, setlat] = useState("");
+  const [long, setlong] = useState("");
+  const service = true;
 
   async function onRegister() {
     try {
       await firebase.register(name, email, password);
-      await firebase.addUser(name, email, city, state, postalcode);
+      await firebase.addUser(
+        name,
+        email,
+        city,
+        state,
+        postalcode,
+        lat,
+        long,
+        service
+      );
       history.replace("/login");
     } catch (error) {
       alert(error.message);
     }
   }
+
+  function Locate() {
+    return (
+      <button
+        onClick={() => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              console.log(
+                position.coords.latitude + "  " + position.coords.longitude
+              );
+              setlat(position.coords.latitude);
+              setlong(position.coords.longitude);
+            },
+            () => null
+          );
+        }}
+      >
+        <img
+          src="https://cdn.iconscout.com/icon/free/png-256/compass-62-93840.png"
+          alt="compass"
+          style={{ width: "50px", height: "50px" }}
+        />
+      </button>
+    );
+  }
+
   // const handleSignUp = useCallback(
   //   async (event) => {
   //     event.preventDefault();
@@ -144,6 +182,8 @@ const Volunteer = ({ history }) => {
                   className="form-control"
                   placeholder="Address 2"
                 /> */}
+                {"           "}
+                <Locate />
               </div>
               <div class="form-row">
                 <div class="col-6 mb-30">

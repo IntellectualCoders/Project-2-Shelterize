@@ -4,27 +4,106 @@ import Footer from "./Footer";
 import { AuthContext } from "../firebase/auth";
 import firebase from "../firebase/base";
 import { withRouter } from "react-router-dom";
+// import {
+//   GoogleMap,
+//   useLoadScript,
+//   Marker,
+//   InfoWindow,
+// } from "@react-google-maps/api";
+// import usePlacesAutocomplete, {
+//   getGeocode,
+//   getLatLng,
+// } from "use-places-autocomplete";
+
+// const libraries = ["places"];
+// const mapContainerStyle = {
+//   height: "35vh",
+//   width: "50vw",
+// };
+// const options = {
+//   disableDefaultUI: true,
+//   zoomControl: true,
+// };
+// const center = {
+//   lat: 28.7162,
+//   lng: 77.1171,
+// };
 
 const Profile = ({ history }) => {
+  // const { isLoaded, loadError } = useLoadScript({
+  //   googleMapsApiKey: "AIzaSyBCO7fqvr8Uzl-GSJgZDA4Lzb1nrw6Yx7o",
+  //   libraries,
+  // });
+  // const [markers, setMarkers] = useState();
   const currUser = firebase.getCurrentUsername();
   const [userdetail, setUserdetail] = useState([null]);
 
-  let b = 1;
   var data;
+  // var cen;
   useEffect(() => {
-    firebase.db
-      .collection("users")
-      .where("email", "==", `${currUser}`)
-      .get()
-      .then((querySnapshot) => {
-        data = querySnapshot.docs.map((doc) => doc.data());
-        // console.log("data: " + data[0].name);
-        setUserdetail(data);
-        // console.log(userdetail[0].name);
-      });
+    const fetchdata = async () => {
+      await firebase.db
+        .collection("users")
+        .where("email", "==", `${currUser}`)
+        .get()
+        .then((querySnapshot) => {
+          data = querySnapshot.docs.map((doc) => doc.data());
+          // console.log("data: " + data[0].name);
+          setUserdetail(data);
+
+          // console.log(userdetail[0].name);
+        });
+    };
+    fetchdata();
   });
 
-  return (
+  // const mapRef = React.useRef();
+  // const onMapLoad = React.useCallback((map) => {
+  //   mapRef.current = map;
+  // }, []);
+  // if (loadError) return "Error";
+  // if (!isLoaded) return "Loading...";
+
+  const onUpdate = () => {
+    const db = firebase.db;
+    db.collection("users")
+      .doc(userdetail[0].uid.toString())
+      .set({ ...userdetail[0], service: false });
+  };
+
+  // function Locate({}) {
+  //   return (
+  //     <button
+  //       className="locate"
+  //       onClick={() => {
+  // navigator.geolocation.getCurrentPosition(
+  //   (position) => {
+  //     console.log(
+  //       position.coords.latitude + "  " + position.coords.longitude
+  //     );
+  // panTo({
+  //   lat: userdetail[0].lat,
+  //   lng: userdetail[0].long,
+  // });
+  // const panTo = React.useCallback(({ lat, lng }) => {
+  // mapRef.current.panTo(userdetail[0].lat, userdetail[0].long);
+  // mapRef.current.setZoom(14);
+  // }, []);
+  //   },
+  //   () => null
+  // );
+  //       }}
+  //     >
+  //       <img
+  //         src="https://cdn.iconscout.com/icon/free/png-256/compass-62-93840.png"
+  //         alt="compass"
+  //         style={{ width: "50px", height: "50px" }}
+  //       />
+  //     </button>
+  //   );
+  // }
+
+  return userdetail !== null ? (
     <>
       <Header />
       <section className="banner-area relative" id="home">
@@ -48,7 +127,10 @@ const Profile = ({ history }) => {
           style={{ backgroundColor: "black", opacity: "0.7", color: "white" }}
         >
           <div className="row justify-content-center">
-            <form className="col-lg-8">
+            <form
+              className="col-lg-8"
+              onSubmit={(e) => e.preventDefault() && false}
+            >
               <div className="form-group">
                 <br />
                 <br />
@@ -96,7 +178,7 @@ const Profile = ({ history }) => {
                     type="password"
                     placeholder="Password"
                     class="form-control"
-                    required
+                    // required
                   />
                 </div>
               </div>
@@ -108,7 +190,7 @@ const Profile = ({ history }) => {
                 >
                   Address
                 </label>
-                <input
+                {/* <input
                   type="text"
                   className="form-control mb-20"
                   placeholder="Your Address"
@@ -117,7 +199,41 @@ const Profile = ({ history }) => {
                   type="text"
                   className="form-control"
                   placeholder="Address 2"
-                />
+                /> */}
+                {/* <Locate />
+                <GoogleMap
+                  id="map"
+                  mapContainerStyle={mapContainerStyle}
+                  zoom={8}
+                  center={center}
+                  options={options}
+                  // onClick={onMapClick}
+                  onLoad={onMapLoad}
+                >
+                  {userdetail !== null &&
+                  userdetail[0] !== null &&
+                  userdetail !== undefined &&
+                  userdetail[0] !== undefined ? (
+                    <Marker
+                      key={userdetail[0].uid}
+                      position={{
+                        lat: userdetail[0].lat,
+                        lng: userdetail[0].long,
+                      }}
+                      // onClick={() => {
+                      //   setSelected(marker);
+                      // }}
+                      icon={{
+                        url: `https://www.svgrepo.com/show/21602/home-with-a-heart.svg`,
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                        scaledSize: new window.google.maps.Size(30, 30),
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </GoogleMap> */}
               </div>
               <div class="form-row">
                 <div class="col-6 mb-30">
@@ -191,7 +307,7 @@ const Profile = ({ history }) => {
                     type="phone"
                     placeholder="Phone no."
                     class="form-control"
-                    required
+                    // required
                   />
                 </div>
                 <div class="col-6 mb-30">
@@ -205,16 +321,16 @@ const Profile = ({ history }) => {
                     type="number"
                     placeholder="Capacity of people willing to take in"
                     class="form-control"
-                    required
+                    // required
                   />
                 </div>
               </div>
-              <form>
-                <button type="submit" className="form-btn">
-                  Stop Services
-                </button>
-              </form>
-              <button className="primary-btn float-right">
+
+              <button type="submit" onClick={onUpdate} className="form-btn">
+                Stop Services
+              </button>
+
+              <button onClick="/list" className="primary-btn float-right">
                 {" "}
                 Move to list{" "}
               </button>
@@ -227,6 +343,8 @@ const Profile = ({ history }) => {
       </section>
       <Footer />
     </>
+  ) : (
+    <div>Loading....</div>
   );
 };
 export default withRouter(Profile);

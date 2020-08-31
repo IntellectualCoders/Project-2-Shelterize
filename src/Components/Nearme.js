@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -11,17 +11,9 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 
 import "./nearme.css";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
-import { formatRelative } from "date-fns";
 
-// import "@reach/combobox/styles.css";
-// import mapStyles from "./mapStyles";
+import { formatRelative } from "date-fns";
+import firebase from "../firebase/base";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -45,16 +37,30 @@ export default function App() {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
+  // const [userdetail, setUserdetail] = useState([null]);
+
+  var data;
+  useEffect(() => {
+    firebase.db
+      .collection("users")
+      .get()
+      .then((querySnapshot) => {
+        data = querySnapshot.docs.map((doc) => doc.data());
+        // console.log("data: " + data[0].name);
+        setMarkers(data);
+      });
   }, []);
+
+  // const onMapClick = React.useCallback((e) => {
+  //   setMarkers((current) => [
+  //     ...current,
+  //     {
+  //       lat: e.latLng.lat(),
+  //       lng: e.latLng.lng(),
+  //       time: new Date(),
+  //     },
+  //   ]);
+  // }, []);
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -74,7 +80,7 @@ export default function App() {
       <h1 className="h1near">Shelterize </h1>
 
       <Locate panTo={panTo} />
-      <Search panTo={panTo} />
+      {/* <Search panTo={panTo} /> */}
 
       <GoogleMap
         id="map"
@@ -85,10 +91,28 @@ export default function App() {
         // onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {/* {markers.map((marker) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            position={{ lat: marker.lat, lng: marker.long }}
+            onClick={() => {
+              setSelected(marker);
+            }}
+            icon={{
+              url: `https://www.svgrepo.com/show/21602/home-with-a-heart.svg`,
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+              scaledSize: new window.google.maps.Size(30, 30),
+            }}
+          />
+        ))} */}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.uid}
+            position={{
+              lat: marker.lat,
+              lng: marker.long,
+            }}
             onClick={() => {
               setSelected(marker);
             }}
@@ -103,7 +127,7 @@ export default function App() {
 
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{ lat: selected.lat, lng: selected.long }}
             onCloseClick={() => {
               setSelected(null);
             }}
@@ -115,7 +139,7 @@ export default function App() {
                 </span>{" "}
                 Alert
               </h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
+              <p>Spotted {selected.name}</p>
             </div>
           </InfoWindow>
         ) : null}
