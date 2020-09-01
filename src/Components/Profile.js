@@ -4,37 +4,37 @@ import Footer from "./Footer";
 import { AuthContext } from "../firebase/auth";
 import firebase from "../firebase/base";
 import { withRouter } from "react-router-dom";
-// import {
-//   GoogleMap,
-//   useLoadScript,
-//   Marker,
-//   InfoWindow,
-// } from "@react-google-maps/api";
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
-// const libraries = ["places"];
-// const mapContainerStyle = {
-//   height: "35vh",
-//   width: "50vw",
-// };
-// const options = {
-//   disableDefaultUI: true,
-//   zoomControl: true,
-// };
-// const center = {
-//   lat: 28.7162,
-//   lng: 77.1171,
-// };
+const libraries = ["places"];
+const mapContainerStyle = {
+  height: "35vh",
+  width: "50vw",
+};
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
+const center = {
+  lat: 28.7162,
+  lng: 77.1171,
+};
 
 const Profile = ({ history }) => {
-  // const { isLoaded, loadError } = useLoadScript({
-  //   googleMapsApiKey: "AIzaSyBCO7fqvr8Uzl-GSJgZDA4Lzb1nrw6Yx7o",
-  //   libraries,
-  // });
-  // const [markers, setMarkers] = useState();
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: "AIzaSyBCO7fqvr8Uzl-GSJgZDA4Lzb1nrw6Yx7o",
+    libraries,
+  });
+  const [markers, setMarkers] = useState();
   const currUser = firebase.getCurrentUsername();
   const [userdetail, setUserdetail] = useState([null]);
 
@@ -57,12 +57,12 @@ const Profile = ({ history }) => {
     fetchdata();
   });
 
-  // const mapRef = React.useRef();
-  // const onMapLoad = React.useCallback((map) => {
-  //   mapRef.current = map;
-  // }, []);
-  // if (loadError) return "Error";
-  // if (!isLoaded) return "Loading...";
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+  if (loadError) return "Error";
+  if (!isLoaded) return "Loading...";
 
   const onUpdate = () => {
     const db = firebase.db;
@@ -71,41 +71,27 @@ const Profile = ({ history }) => {
       .set({ ...userdetail[0], service: false });
   };
 
-  // function Locate({}) {
-  //   return (
-  //     <button
-  //       className="locate"
-  //       onClick={() => {
-  // navigator.geolocation.getCurrentPosition(
-  //   (position) => {
-  //     console.log(
-  //       position.coords.latitude + "  " + position.coords.longitude
-  //     );
-  // panTo({
-  //   lat: userdetail[0].lat,
-  //   lng: userdetail[0].long,
-  // });
-  // const panTo = React.useCallback(({ lat, lng }) => {
-  // mapRef.current.panTo(userdetail[0].lat, userdetail[0].long);
-  // mapRef.current.setZoom(14);
-  // }, []);
-  //   },
-  //   () => null
-  // );
-  //       }}
-  //     >
-  //       <img
-  //         src="https://cdn.iconscout.com/icon/free/png-256/compass-62-93840.png"
-  //         alt="compass"
-  //         style={{ width: "50px", height: "50px" }}
-  //       />
-  //     </button>
-  //   );
-  // }
+  function Locate({}) {
+    return (
+      <button
+        // className="locate"
+        onClick={() => {
+          mapRef.current.panTo(userdetail[0].lat, userdetail[0].long);
+          mapRef.current.setZoom(20);
+        }}
+      >
+        <img
+          src="https://cdn.iconscout.com/icon/free/png-256/compass-62-93840.png"
+          alt="compass"
+          style={{ width: "50px", height: "50px" }}
+        />
+      </button>
+    );
+  }
 
   return userdetail !== null ? (
     <>
-      <Header />
+      <Header currUser={firebase.getCurrentUsername} history={history} />
       <section className="banner-area relative" id="home">
         <div className="overlay overlay-bg"></div>
         <div className="container">
@@ -200,7 +186,7 @@ const Profile = ({ history }) => {
                   className="form-control"
                   placeholder="Address 2"
                 /> */}
-                {/* <Locate />
+                <Locate />
                 <GoogleMap
                   id="map"
                   mapContainerStyle={mapContainerStyle}
@@ -233,7 +219,7 @@ const Profile = ({ history }) => {
                   ) : (
                     <></>
                   )}
-                </GoogleMap> */}
+                </GoogleMap>
               </div>
               <div class="form-row">
                 <div class="col-6 mb-30">
@@ -330,7 +316,23 @@ const Profile = ({ history }) => {
                 Stop Services
               </button>
 
-              <button onClick="/list" className="primary-btn float-right">
+              {/* <button
+                onClick={() => {
+                  firebase.logout();
+                   history.push("/");
+                  //window.Location("/");
+                }}
+                className="form-btn"
+              >
+                Logout
+              </button> */}
+
+              <button
+                onClick={() => {
+                  history.push("/list");
+                }}
+                className="primary-btn float-right"
+              >
                 {" "}
                 Move to list{" "}
               </button>

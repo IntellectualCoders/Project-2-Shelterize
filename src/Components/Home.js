@@ -4,7 +4,7 @@ import Footer from "./Footer";
 const Home = () => {
   return (
     <div>
-      <Header />
+      <Header currUser={null} />
       <section className="banner-area relative" id="home">
         <div className="container">
           <div className="overlay overlay-bg"></div>
