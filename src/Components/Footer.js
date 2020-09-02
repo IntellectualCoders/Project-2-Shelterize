@@ -9,7 +9,7 @@ const Footer = () => {
   							<div class="single-footer-widget">
   								<h6>About Us</h6>
   								<p>
-  									We at DogHome wish to provide every Street Dog, dying on the roads due to accidents or starvation, a Home. A place where they can feel at ease, where they can eat, sleep and experience the warmth of love and care.
+  									We at Shelterize wish to provide every homeless person, who does not have a roof to live under due to a disaster or natural clamity, a Home. A place where they can feel at ease, where they can eat, sleep and experience the warmth of love and care.
   								</p>
   							</div>
   						</div>
@@ -25,7 +25,7 @@ const Footer = () => {
   											<span class="lnr lnr-home"></span>
   										</div>
   										<div class="detail">
-  											<h4>Lucknow,India</h4>
+  											<h4>Delhi,India</h4>
 
   										<p>
 
@@ -47,7 +47,7 @@ const Footer = () => {
   											<span class="lnr lnr-envelope"></span>
   										</div>
   										<div class="detail">
-  											<h4>support@doghome.com</h4>
+  											<h4>support@shelterize.com</h4>
   											<p>
   												Send us your query anytime!
   											</p>
