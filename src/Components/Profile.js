@@ -77,7 +77,7 @@ const Profile = ({ history }) => {
       <button
         // className="locate"
         onClick={() => {
-          mapRef.current.panTo(userdetail[0].lat, userdetail[0].lng);
+          mapRef.current.panTo(userdetail[0].lat, userdetail[0].long);
           mapRef.current.setZoom(20);
         }}
       >
@@ -154,7 +154,7 @@ const Profile = ({ history }) => {
                       key={userdetail[0].uid}
                       position={{
                         lat: userdetail[0].lat,
-                        lng: userdetail[0].lng,
+                        lng: userdetail[0].long,
                       }}
                       // onClick={() => {
                       //   setSelected(marker);
@@ -202,15 +202,23 @@ const Profile = ({ history }) => {
             <div className="form-row">
             <div class="col-6 mb-30">
                 <label for="phone no." style={{color:"white", fontSize:"20px"}}>Offical Phone no.</label>
-                <input type="phone" placeholder="Phone no." class="form-control"  />
+                <input type="phone" placeholder="Phone no." class="form-control"  value={
+                      userdetail[0] == null
+                        ? "Phone no."
+                        : userdetail[0].phone
+                    } required />
             </div>
             <div class="col-6 mb-30">
-                <label for="phone no."style={{color:"white", fontSize:"20px"}}>Capacity</label>
-                <input type="number" placeholder="Capacity of people willing to take in" class="form-control"  />
+                <label for="capacity"style={{color:"white", fontSize:"20px"}}>Capacity</label>
+                <input type="number" placeholder="Capacity of people willing to take in" class="form-control" value={
+                      userdetail[0] == null
+                        ? "Capacity"
+                        : userdetail[0].capacity
+                    } required />
             </div>
             </div>
           
-               <button type="submit" className="form-btn">Stop Services</button>
+               <button type="submit" onClick={onUpdate} className="form-btn">Stop Services</button>
            <button
                 onClick={() => {
                   history.push("/list");

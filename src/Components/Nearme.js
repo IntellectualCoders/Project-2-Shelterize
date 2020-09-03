@@ -193,11 +193,12 @@ export default function App() {
             <div>
               <h2>
                 <span role="img" aria-label="bear">
-                  🐻
+                  <img src="https://www.svgrepo.com/show/5321/building.svg" style={{height:"100px",width:"40px"}} alt="shelter"></img>
                 </span>{" "}
-                Alert
+                {selected.name}
               </h2>
-              <p>Spotted {selected.name}</p>
+              <p>{selected.address}</p>
+              <p>{selected.phone}</p>
             </div>
           </InfoWindow>
         ) : null}

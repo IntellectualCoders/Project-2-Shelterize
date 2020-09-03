@@ -54,7 +54,7 @@ class Firebase {
     });
   }
 
-  addUser(name, email, city, state, postalcode, lat, long, service) {
+  addUser(name, email, address, city, state, postalcode,phone,capacity, lat, long, service) {
     // if (!this.auth.currentUser) {
     //   return alert("Not authorized");
     // }
@@ -68,10 +68,13 @@ class Firebase {
     // });
     const data = {
       name,
+      address,
       email,
       city,
       state,
       postalcode,
+      phone,
+      capacity,
       lat,
       long,
       service,
@@ -95,7 +98,7 @@ class Firebase {
       });
   }
 
-  addCustomer(name, age, email, phone, city, state, postalcode, lat, long) {
+  addCustomer(name, age, email, phone, city, state, postalcode, lat, long,complete) {
     const data = {
       name,
       age,
@@ -106,6 +109,7 @@ class Firebase {
       postalcode,
       lat,
       long,
+      complete,
       uid: new Date().getTime(),
     };
 

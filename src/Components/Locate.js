@@ -14,6 +14,7 @@ const Locate = ({ history }) => {
   const [postalcode, setPostalcode] = useState("");
   const [lat, setlat] = useState("");
   const [long, setlong] = useState("");
+  const complete = false;
 
   async function onRegister() {
     try {
@@ -26,7 +27,8 @@ const Locate = ({ history }) => {
         state,
         postalcode,
         lat,
-        long
+        long,
+        complete
       );
       history.replace("/nearme");
     } catch (error) {

@@ -15,20 +15,25 @@ const Header = (props) => {
               <li className="menu-active">
                 <a href="/">Home</a>
               </li>
+              {props !== undefined &&
+              props !== null &&
+              props.currUser !== null ? (
               <li>
-                <a href="./#end">About Us</a>
-              </li>
-
-              <li>
+                <a href="/profile">Profile</a>
+              </li>):(
+                <li>
                 <a href="/locate">Need help</a>
               </li>
-              <li>
+              )}
+               {props !== undefined &&
+              props !== null &&
+              props.currUser !== null ? (
+                <></>
+              ):(
+                <li>
                 <a href="/login">Want to help</a>
               </li>
-
-              <li>
-                <a href="./#end">Contact Us</a>
-              </li>
+              )}
               {props !== undefined &&
               props !== null &&
               props.currUser !== null ? (
@@ -39,6 +44,7 @@ const Header = (props) => {
                     //window.Location("/");
                   }}
                   className="form-btn"
+                  style={{borderRadius:"10px", height:"30px", lineHeight:" 0px"}}
                 >
                   Logout
                 </button>

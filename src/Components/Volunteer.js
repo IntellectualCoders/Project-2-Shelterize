@@ -3,27 +3,39 @@ import Header from "./Header";
 import Footer from "./Footer";
 import firebase from "../firebase/base";
 import { withRouter } from "react-router-dom";
+import Fade from 'react-reveal/Fade';
 
 const Volunteer = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalcode, setPostalcode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [capacity, setCapacity] = useState("");
   const [lat, setlat] = useState("");
   const [long, setlong] = useState("");
+  const [cityerror, setCityerror] = useState("");
   const service = true;
-
+   const cityerr = () =>{
+      if(!isNaN(city))
+      setCityerror("is-invalid")
+      else setCityerror(" ")
+   }
   async function onRegister() {
     try {
       await firebase.register(name, email, password);
       await firebase.addUser(
         name,
         email,
+        address,
         city,
         state,
         postalcode,
+        phone,
+        capacity,
         lat,
         long,
         service
@@ -122,8 +134,10 @@ const Volunteer = ({ history }) => {
             <hr/>
             <div className="form-group">
               <label for="Address">Address</label>
-              {/* <input type="text" className="form-control mb-20" placeholder="Your Address"  onChange={handleInputChange}/>
-              <input type="text" className="form-control" placeholder="Address 2"  onChange={handleInputChange}/> */}
+              <input type="text" className="form-control mb-20" placeholder="Your Address"  required  value={address}
+                      onChange={(e) => {
+                        setAddress(e.target.value);
+                      }} />
               <Locate />
             </div>
             <div class="form-row">
@@ -133,7 +147,14 @@ const Volunteer = ({ history }) => {
                 <input type="text" placeholder="City" class="form-control" required  value={city}
                       onChange={(e) => {
                         setCity(e.target.value);
+                        cityerr(city);
                       }} />
+                <Fade bottom collapse when={cityerror}>
+          <div className="invalid-feedback" style={{ display: 'block' }}
+          >
+           City can not have a no.
+          </div>
+        </Fade>
               </div>
               </div>
               <div class="col-6 mb-30">
@@ -162,11 +183,17 @@ const Volunteer = ({ history }) => {
             <div className="form-row">
             <div class="col-6 mb-30">
                 <label for="phone no.">Offical Phone no.</label>
-                <input type="phone" placeholder="Phone no." class="form-control"  />
+                <input type="phone" placeholder="Phone no." class="form-control" required   value={phone}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}/>
             </div>
             <div class="col-6 mb-30">
                 <label for="phone no.">Capacity</label>
-                <input type="number" placeholder="Capacity of people willing to take in" class="form-control"   />
+                <input type="number" placeholder="Capacity of people willing to take in" class="form-control" required   value={capacity}
+                    onChange={(e) => {
+                      setCapacity(e.target.value);
+                    }}/>
             </div>
             </div>
 
